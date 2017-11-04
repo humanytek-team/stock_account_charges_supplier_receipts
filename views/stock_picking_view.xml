@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_picking_form_charges_supplier" model="ir.ui.view">
+            <field name="name">picking.form.charges.supplier</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                <xpath
+                  expr="//notebook"
+                  position="inside"
+                  attrs="{'invisible': [('code', '=', 'incomming')]}">
+
+                  <page string="Charges to supplier">
+
+                    <field
+                      name="charge_supplier_receipt_ids"
+                      widget="checkbox" />                    
+
+                  </page>
+
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>
