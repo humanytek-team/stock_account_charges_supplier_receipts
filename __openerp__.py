@@ -13,6 +13,7 @@
         'stock_account',
         ],
     'data': [
+        'security/ir.model.access.csv',
         'views/stock_picking_view.xml',
         'views/charge_supplier_receipt_view.xml',
     ],

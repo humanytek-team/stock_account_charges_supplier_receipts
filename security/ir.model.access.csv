@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_charge_suppliers_stock_manager,charge.suppliers.stock.manager,model_charge_supplier_receipt,stock.group_stock_manager,1,1,1,1
+access_charge_suppliers_stock_user,charge.suppliers.stock.user,model_charge_supplier_receipt,stock.group_stock_user,1,0,1,1
+access_picking_charge_product_box_stock_manager,stock.picking.charge.product.box.manager,model_stock_picking_charge_product_box,stock.group_stock_manager,1,1,1,1
+access_picking_charge_product_box_stock_user,stock.picking.charge.product.box.user,model_stock_picking_charge_product_box,stock.group_stock_user,1,1,1,1

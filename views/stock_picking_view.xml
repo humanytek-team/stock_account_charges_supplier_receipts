@@ -15,9 +15,21 @@
 
                   <page string="Charges to supplier">
 
-                    <field
-                      name="charge_supplier_receipt_ids"
-                      widget="checkbox" />                    
+                    <!-- Hidden fields -->
+                    <field name="show_charge_product_box_ids" invisible="1"/>
+
+                    <separator string="Charges" />
+                    <field name="charge_supplier_receipt_ids">
+                      <tree edit="false">
+                        <field name="name" />
+                      </tree>
+                    </field>
+
+                    <group attrs="{'invisible': [('show_charge_product_box_ids', '=', False)]}">
+                      <separator string="Incorrect Product Boxes" />
+                      <newline />
+                      <field name="charge_product_box_ids" nolabel="1"/>
+                    </group>
 
                   </page>
 
