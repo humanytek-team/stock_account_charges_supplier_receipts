@@ -25,7 +25,19 @@ class StockPicking(models.Model):
         default=False)
     total_charge_product_box_ids = fields.Float(
         'Total of charges by incorrect box',
-        compute='_compute_total_charge_product_box_ids'
+        compute='_compute_total_charges'
+    )
+    charge_other_supplier_box_ids = fields.One2many(
+        'stock.picking.charge.other.supplier.box',
+        'picking_id',
+        'Charges by box of other vendor')
+    show_charge_other_supplier_box_ids = fields.Boolean(
+        'Show field charge_other_supplier_box_ids',
+        help='Technical field',
+        default=False)
+    total_charge_other_supplier_box_ids = fields.Float(
+        'Total of charges by box of other vendor',
+        compute='_compute_total_charges'
     )
 
     @api.onchange('charge_supplier_receipt_ids')
@@ -33,17 +45,26 @@ class StockPicking(models.Model):
         """Process event onchange on field charge_supplier_receipt_ids"""
 
         show_charge_product_box_ids = False
+        show_charge_other_supplier_box_ids = False
         for charge in self.charge_supplier_receipt_ids:
             if charge.applied_on == 'cost_per_box':
                 show_charge_product_box_ids = True
+            if charge.applied_on == 'double_cost_box':
+                show_charge_other_supplier_box_ids = True
 
         self.show_charge_product_box_ids = show_charge_product_box_ids
+        self.show_charge_other_supplier_box_ids = \
+            show_charge_other_supplier_box_ids
 
-    @api.depends('charge_product_box_ids')
-    def _compute_total_charge_product_box_ids(self):
-        """Computes value of field charge_product_box_ids"""
+    @api.depends('charge_product_box_ids', 'charge_other_supplier_box_ids')
+    def _compute_total_charges(self):
+        """Computes value of fields total_charge_product_box_ids,
+        total_charge_other_supplier_box_ids."""
 
         for record in self:
             if record.charge_product_box_ids:
                 record.total_charge_product_box_ids = sum(
                     record.charge_product_box_ids.mapped('amount'))
+            if record.charge_other_supplier_box_ids:
+                record.total_charge_other_supplier_box_ids = sum(
+                    record.charge_other_supplier_box_ids.mapped('amount'))
