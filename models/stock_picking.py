@@ -51,6 +51,15 @@ class StockPicking(models.Model):
         'Total of charges by change in material',
         compute='_compute_total_charges'
     )
+    show_charge_label = fields.Boolean(
+        'Show fields of charge by missing tags ',
+        help='Technical field',
+        default=False)
+    label_qty = fields.Integer('Quantity of missing tags')
+    total_charge_label = fields.Float(
+        'Total of charges by missing tags',
+        compute='_compute_total_charges'
+    )
 
     @api.onchange('charge_supplier_receipt_ids')
     def onchange_charges_supplier(self):
@@ -59,6 +68,7 @@ class StockPicking(models.Model):
         show_charge_product_box_ids = False
         show_charge_other_supplier_box_ids = False
         show_charge_change_material_ids = False
+        show_charge_label = False
 
         for charge in self.charge_supplier_receipt_ids:
             if charge.applied_on == 'cost_per_box':
@@ -68,27 +78,44 @@ class StockPicking(models.Model):
             if charge.applied_on == 'order_template_total' and \
                     charge.template_total_type == 'change_material':
                 show_charge_change_material_ids = True
+            if charge.applied_on == 'label':
+                show_charge_label = True
 
         self.show_charge_product_box_ids = show_charge_product_box_ids
         self.show_charge_other_supplier_box_ids = \
             show_charge_other_supplier_box_ids
         self.show_charge_change_material_ids = show_charge_change_material_ids
+        self.show_charge_label = show_charge_label
 
     @api.depends(
         'charge_product_box_ids',
         'charge_other_supplier_box_ids',
-        'charge_change_material_ids')
+        'charge_change_material_ids',
+        'label_qty')
     def _compute_total_charges(self):
         """Computes value of fields total_charge_product_box_ids,
         total_charge_other_supplier_box_ids."""
 
+        ChargeSupplierReceipt = self.env['charge.supplier.receipt']
+
         for record in self:
+
             if record.charge_product_box_ids:
                 record.total_charge_product_box_ids = sum(
                     record.charge_product_box_ids.mapped('amount'))
+
             if record.charge_other_supplier_box_ids:
                 record.total_charge_other_supplier_box_ids = sum(
                     record.charge_other_supplier_box_ids.mapped('amount'))
+
             if record.charge_change_material_ids:
                 record.total_charge_change_material_ids = sum(
                     record.charge_change_material_ids.mapped('amount'))
+
+            if record.label_qty > 0:
+                charge_label = ChargeSupplierReceipt.search([
+                    ('applied_on', '=', 'label')
+                ])
+                if charge_label:
+                    record.total_charge_label = \
+                        charge_label[0].amount * record.label_qty

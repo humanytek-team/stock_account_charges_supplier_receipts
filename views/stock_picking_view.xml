@@ -19,7 +19,7 @@
                     <field name="show_charge_product_box_ids" invisible="1"/>
                     <field name="show_charge_other_supplier_box_ids" invisible="1"/>
                     <field name="show_charge_change_material_ids" invisible="1"/>
-                    <field name="total_charge_change_material_ids" />
+                    <field name="show_charge_label" invisible="1"/>
 
                     <separator string="Charges" />
                     <field
@@ -82,6 +82,15 @@
                         </tree>
 
                       </field>
+                    </group>
+
+                    <group
+                      attrs="{'invisible': [('show_charge_label', '=', False)]}">
+
+                      <separator string="Changes by missing tags" />
+                      <newline />
+                      <field name="label_qty" />
+                      <field name="total_charge_label" />
                     </group>
 
                   </page>
