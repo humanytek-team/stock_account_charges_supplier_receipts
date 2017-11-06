@@ -11,6 +11,7 @@
     'license': 'AGPL-3',
     'depends': [
         'stock_account',
+        'purchase',
         ],
     'data': [
         'security/ir.model.access.csv',

@@ -28,7 +28,7 @@ class ChargeSupplierReceipt(models.Model):
         required=True
         )
     template_total_type = fields.Selection(
-        [('change_color', _('Change Color or Material')),
+        [('change_material', _('Change Material')),
          ('monarch_unattached_neck', _('Monarch unattached to the neck')),
         ],
         'Type of application over total order of product template')
