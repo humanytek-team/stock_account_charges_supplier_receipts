@@ -17,7 +17,9 @@
 
                     <!-- Hidden fields -->
                     <field name="show_charge_product_box_ids" invisible="1"/>
-                    <field name="show_charge_other_supplier_box_ids" invisible="1"/>                    
+                    <field name="show_charge_other_supplier_box_ids" invisible="1"/>
+                    <field name="show_charge_change_material_ids" invisible="1"/>
+                    <field name="total_charge_change_material_ids" />
 
                     <separator string="Charges" />
                     <field
@@ -58,6 +60,24 @@
                         <tree editable="bottom">
                             <field name="product_id" />
                             <field name="qty" />
+                            <field name="amount" />
+                        </tree>
+
+                      </field>
+                    </group>
+
+                    <group attrs="{'invisible': [('show_charge_change_material_ids', '=', False)]}">
+                      <separator string="Changes in material" />
+                      <newline />
+                      <field
+                        name="charge_change_material_ids"
+                        nolabel="1"
+                        attrs="{'readonly': [('state', '=', 'done')]}">
+
+                        <tree editable="bottom">
+                            <field name="product_tmpl_id" />
+                            <field name="qty" />
+                            <field name="total_order_template" />
                             <field name="amount" />
                         </tree>
 

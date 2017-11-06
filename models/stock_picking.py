@@ -39,6 +39,18 @@ class StockPicking(models.Model):
         'Total of charges by box of other vendor',
         compute='_compute_total_charges'
     )
+    charge_change_material_ids = fields.One2many(
+        'stock.picking.charge.change.material',
+        'picking_id',
+        'Charges by change of material')
+    show_charge_change_material_ids = fields.Boolean(
+        'Show field charge_change_material_ids',
+        help='Technical field',
+        default=False)
+    total_charge_change_material_ids = fields.Float(
+        'Total of charges by change in material',
+        compute='_compute_total_charges'
+    )
 
     @api.onchange('charge_supplier_receipt_ids')
     def onchange_charges_supplier(self):
@@ -46,17 +58,26 @@ class StockPicking(models.Model):
 
         show_charge_product_box_ids = False
         show_charge_other_supplier_box_ids = False
+        show_charge_change_material_ids = False
+
         for charge in self.charge_supplier_receipt_ids:
             if charge.applied_on == 'cost_per_box':
                 show_charge_product_box_ids = True
             if charge.applied_on == 'double_cost_box':
                 show_charge_other_supplier_box_ids = True
+            if charge.applied_on == 'order_template_total' and \
+                    charge.template_total_type == 'change_material':
+                show_charge_change_material_ids = True
 
         self.show_charge_product_box_ids = show_charge_product_box_ids
         self.show_charge_other_supplier_box_ids = \
             show_charge_other_supplier_box_ids
+        self.show_charge_change_material_ids = show_charge_change_material_ids
 
-    @api.depends('charge_product_box_ids', 'charge_other_supplier_box_ids')
+    @api.depends(
+        'charge_product_box_ids',
+        'charge_other_supplier_box_ids',
+        'charge_change_material_ids')
     def _compute_total_charges(self):
         """Computes value of fields total_charge_product_box_ids,
         total_charge_other_supplier_box_ids."""
@@ -68,3 +89,6 @@ class StockPicking(models.Model):
             if record.charge_other_supplier_box_ids:
                 record.total_charge_other_supplier_box_ids = sum(
                     record.charge_other_supplier_box_ids.mapped('amount'))
+            if record.charge_change_material_ids:
+                record.total_charge_change_material_ids = sum(
+                    record.charge_change_material_ids.mapped('amount'))

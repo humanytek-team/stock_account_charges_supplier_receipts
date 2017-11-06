@@ -25,7 +25,7 @@ class StockPickingChargeChangeMaterial(models.Model):
         for record in self:
             if record.picking_id and record.product_tmpl_id:
                 if record.picking_id.purchase_id:
-                    po_lines = record.picking_id.order_line.filtered(
+                    po_lines = record.picking_id.purchase_id.order_line.filtered(
                         lambda line: line.product_id.product_tmpl_id.id ==
                         record.product_tmpl_id.id
                     )
