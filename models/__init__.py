@@ -6,3 +6,4 @@ from . import charge_supplier_receipt
 from . import stock_picking
 from . import stock_picking_charge_other_supplier_box
 from . import stock_picking_charge_change_material
+from . import stock_picking_charge_monarch_unattached_neck
