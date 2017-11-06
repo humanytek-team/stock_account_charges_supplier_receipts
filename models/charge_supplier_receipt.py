@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
 
 
 class ChargeSupplierReceipt(models.Model):
@@ -35,6 +36,7 @@ class ChargeSupplierReceipt(models.Model):
 
 class StockPickingChargeProductBox(models.Model):
     _name = 'stock.picking.charge.product.box'
+    _rec_name = 'product_id'
 
     picking_id = fields.Many2one('stock.picking', 'Picking', required=True)
     product_id = fields.Many2one('product.product', 'Product', required=True)
@@ -47,3 +49,16 @@ class StockPickingChargeProductBox(models.Model):
             if record.product_id and record.qty:
                 record.amount = record.product_id.product_box_id.cost * \
                     record.qty
+
+    @api.model
+    def create(self, vals):
+        StockPicking = self.env['stock.picking']
+        picking = StockPicking.browse(vals['picking_id'])
+
+        if vals['product_id'] not in picking.mapped(
+                'move_lines_related.product_id.id'):
+
+            raise ValidationError(
+                _("The product doesn't is part of this transfer."))
+
+        return super(StockPickingChargeProductBox, self).create(vals)

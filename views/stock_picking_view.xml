@@ -16,7 +16,7 @@
                   <page string="Charges to supplier">
 
                     <!-- Hidden fields -->
-                    <field name="show_charge_product_box_ids" invisible="1"/>
+                    <field name="show_charge_product_box_ids" invisible="1"/>                    
 
                     <separator string="Charges" />
                     <field name="charge_supplier_receipt_ids">
@@ -28,7 +28,13 @@
                     <group attrs="{'invisible': [('show_charge_product_box_ids', '=', False)]}">
                       <separator string="Incorrect Product Boxes" />
                       <newline />
-                      <field name="charge_product_box_ids" nolabel="1"/>
+                      <field name="charge_product_box_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="product_id" />
+                            <field name="qty" />
+                            <field name="amount" />
+                        </tree>
+                      </field>
                     </group>
 
                   </page>
