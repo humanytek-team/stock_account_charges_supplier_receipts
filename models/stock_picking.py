@@ -23,6 +23,10 @@ class StockPicking(models.Model):
         'Show field charge_product_box_ids',
         help='Technical field',
         default=False)
+    total_charge_product_box_ids = fields.Float(
+        'Total of charges by incorrect box',
+        compute='_compute_total_charge_product_box_ids'
+    )
 
     @api.onchange('charge_supplier_receipt_ids')
     def onchange_charges_supplier(self):
@@ -34,3 +38,12 @@ class StockPicking(models.Model):
                 show_charge_product_box_ids = True
 
         self.show_charge_product_box_ids = show_charge_product_box_ids
+
+    @api.depends('charge_product_box_ids')
+    def _compute_total_charge_product_box_ids(self):
+        """Computes value of field charge_product_box_ids"""
+
+        for record in self:
+            if record.charge_product_box_ids:
+                record.total_charge_product_box_ids = sum(
+                    record.charge_product_box_ids.mapped('amount'))
