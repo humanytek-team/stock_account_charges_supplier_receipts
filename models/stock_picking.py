@@ -72,6 +72,10 @@ class StockPicking(models.Model):
         'Total of charges by monarch unattached to neck',
         compute='_compute_total_charges'
     )
+    total_charges_by_order = fields.Float(
+        'Total of charges by order',
+        compute='_compute_total_charges'
+    )
 
     @api.onchange('charge_supplier_receipt_ids')
     def onchange_charges_supplier(self):
@@ -105,6 +109,7 @@ class StockPicking(models.Model):
         self.show_charge_monarch_ids = show_charge_monarch_ids
 
     @api.depends(
+        'charge_supplier_receipt_ids',
         'charge_product_box_ids',
         'charge_other_supplier_box_ids',
         'charge_change_material_ids',
@@ -141,3 +146,16 @@ class StockPicking(models.Model):
             if record.charge_monarch_ids:
                 record.total_monarch_ids = sum(
                     record.charge_monarch_ids.mapped('amount'))
+
+            if record.charge_supplier_receipt_ids:
+                charges_by_order = record.charge_supplier_receipt_ids.filtered(
+                    lambda charge: charge.applied_on == 'by_order'
+                )
+                for charge in charges_by_order:
+                    if charge.amount_type == 'amount':
+                        record.total_charges_by_order += charge.amount
+                    else:
+                        if record.purchase_id:
+                            record.total_charges_by_order += (
+                                record.purchase_id.amount_total *
+                                charge.percentage) / 100

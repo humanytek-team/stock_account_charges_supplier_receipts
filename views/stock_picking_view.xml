@@ -29,6 +29,9 @@
 
                       <tree edit="false">
                         <field name="name" />
+                        <field name="amount" />
+                        <field name="percentage" />
+                        <field name="applied_on" />
                       </tree>
 
                     </field>
@@ -43,8 +46,8 @@
 
                         <tree editable="bottom">
                             <field name="product_id" />
-                            <field name="qty" />
-                            <field name="amount" />
+                            <field name="qty" sum="Total Quantity"/>
+                            <field name="amount" sum="Amount Total"/>
                         </tree>
 
                       </field>
@@ -60,8 +63,8 @@
 
                         <tree editable="bottom">
                             <field name="product_id" />
-                            <field name="qty" />
-                            <field name="amount" />
+                            <field name="qty" sum="Total Quantity"/>
+                            <field name="amount" sum="Amount Total" />
                         </tree>
 
                       </field>
@@ -77,9 +80,9 @@
 
                         <tree editable="bottom">
                             <field name="product_tmpl_id" />
-                            <field name="qty" />
+                            <field name="qty" sum="Total Quantity"/>
                             <field name="total_order_template" />
-                            <field name="amount" />
+                            <field name="amount" sum="Amount Total" />
                         </tree>
 
                       </field>
@@ -104,8 +107,8 @@
 
                         <tree editable="bottom">
                             <field name="product_tmpl_id" />
-                            <field name="qty" />
-                            <field name="amount" />
+                            <field name="qty" sum="Total Quantity" />
+                            <field name="amount" sum="Amount Total" />
                         </tree>
 
                       </field>
