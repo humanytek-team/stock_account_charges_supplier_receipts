@@ -20,6 +20,7 @@
                     <field name="show_charge_other_supplier_box_ids" invisible="1"/>
                     <field name="show_charge_change_material_ids" invisible="1"/>
                     <field name="show_charge_label" invisible="1"/>
+                    <field name="show_charge_monarch_ids" invisible="1"/>
 
                     <separator string="Charges" />
                     <field
@@ -91,6 +92,23 @@
                       <newline />
                       <field name="label_qty" />
                       <field name="total_charge_label" />
+                    </group>
+
+                    <group attrs="{'invisible': [('show_charge_monarch_ids', '=', False)]}">
+                      <separator string="Monarch unattached to neck" />
+                      <newline />
+                      <field
+                        name="charge_monarch_ids"
+                        nolabel="1"
+                        attrs="{'readonly': [('state', '=', 'done')]}">
+
+                        <tree editable="bottom">
+                            <field name="product_tmpl_id" />
+                            <field name="qty" />
+                            <field name="amount" />
+                        </tree>
+
+                      </field>
                     </group>
 
                   </page>

@@ -60,6 +60,18 @@ class StockPicking(models.Model):
         'Total of charges by missing tags',
         compute='_compute_total_charges'
     )
+    charge_monarch_ids = fields.One2many(
+        'stock.picking.charge.monarch.unattached.neck',
+        'picking_id',
+        'Charges by monarch unattached to neck')
+    show_charge_monarch_ids = fields.Boolean(
+        'Show field charge_monarch_ids',
+        help='Technical field',
+        default=False)
+    total_monarch_ids = fields.Float(
+        'Total of charges by monarch unattached to neck',
+        compute='_compute_total_charges'
+    )
 
     @api.onchange('charge_supplier_receipt_ids')
     def onchange_charges_supplier(self):
@@ -69,6 +81,7 @@ class StockPicking(models.Model):
         show_charge_other_supplier_box_ids = False
         show_charge_change_material_ids = False
         show_charge_label = False
+        show_charge_monarch_ids = False
 
         for charge in self.charge_supplier_receipt_ids:
             if charge.applied_on == 'cost_per_box':
@@ -80,18 +93,23 @@ class StockPicking(models.Model):
                 show_charge_change_material_ids = True
             if charge.applied_on == 'label':
                 show_charge_label = True
+            if charge.applied_on == 'order_template_total' and \
+                    charge.template_total_type == 'monarch_unattached_neck':
+                show_charge_monarch_ids = True
 
         self.show_charge_product_box_ids = show_charge_product_box_ids
         self.show_charge_other_supplier_box_ids = \
             show_charge_other_supplier_box_ids
         self.show_charge_change_material_ids = show_charge_change_material_ids
         self.show_charge_label = show_charge_label
+        self.show_charge_monarch_ids = show_charge_monarch_ids
 
     @api.depends(
         'charge_product_box_ids',
         'charge_other_supplier_box_ids',
         'charge_change_material_ids',
-        'label_qty')
+        'label_qty',
+        'charge_monarch_ids')
     def _compute_total_charges(self):
         """Computes value of fields total_charge_product_box_ids,
         total_charge_other_supplier_box_ids."""
@@ -119,3 +137,7 @@ class StockPicking(models.Model):
                 if charge_label:
                     record.total_charge_label = \
                         charge_label[0].amount * record.label_qty
+
+            if record.charge_monarch_ids:
+                record.total_monarch_ids = sum(
+                    record.charge_monarch_ids.mapped('amount'))
