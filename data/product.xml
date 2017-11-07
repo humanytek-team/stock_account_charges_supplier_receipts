@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+
+      <record id="product_charge_supplier_receipt" model="product.product">
+          <field name="name">Charge to suppliers</field>
+          <field name="list_price">0.0</field>
+          <field name="standard_price">0.0</field>
+          <field name="type">consu</field>
+          <field name="uom_id" ref="product.product_uom_unit"/>
+          <field name="uom_po_id" ref="product.product_uom_unit"/>          
+      </record>
+
+    </data>
+</odoo>

@@ -2,7 +2,8 @@
 # Copyright 2017 Humanytek - Manuel Marquez <manuel@humanytek.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from openerp import api, fields, models
+from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -159,3 +160,106 @@ class StockPicking(models.Model):
                             record.total_charges_by_order += (
                                 record.purchase_id.amount_total *
                                 charge.percentage) / 100
+
+    @api.multi
+    def do_new_transfer(self):
+
+        AccountInvoice = self.env['account.invoice']
+        AccountInvoiceLine = self.env['account.invoice.line']
+
+        for picking in self:
+            if picking.picking_type_id.code == 'incoming' and \
+                    picking.purchase_id:
+
+                if picking.charge_supplier_receipt_ids:
+
+                    purchase_invoices = picking.purchase_id.invoice_ids.filtered(
+                        lambda inv: inv.state != 'cancel'
+                    )
+
+                    if purchase_invoices:
+                        invoice_origin = purchase_invoices[0].number
+
+                        in_refund_invoice = AccountInvoice.create({
+                            'type': 'in_refund',
+                            'origin': invoice_origin,
+                            'partner_id': purchase_invoices[0].partner_id.id,
+                            'currency_id': purchase_invoices[0].currency_id.id,
+                            'company_id': purchase_invoices[0].company_id.id,
+                            'user_id': purchase_invoices[0].user_id.id,
+                            'name': _('Charge to supplier over invoice of purchase order %s' % picking.purchase_id.name)
+                        })
+
+                    else:
+
+                        in_refund_invoice = AccountInvoice.create({
+                            'type': 'in_refund',
+                            'partner_id': picking.partner_id.id,
+                            'currency_id': picking.purchase_id.currency_id.id,
+                            'company_id': picking.purchase_id.company_id.id,
+                            'name': _('Charge to supplier over invoice of purchase order %s' % picking.purchase_id.name)
+                        })
+
+                    charge_supplier_product = self.env.ref(
+                        'stock_account_charges_supplier_receipts.product_charge_supplier_receipt')
+
+                    if charge_supplier_product:
+
+                        for charge in picking.charge_supplier_receipt_ids:
+
+                            price_unit = 0
+                            name = charge.name
+
+                            if charge.applied_on == 'by_order':
+
+                                if charge.amount_type == 'amount':
+                                    price_unit = charge.amount
+                                else:
+                                    price_unit = (
+                                        picking.purchase_id.amount_total *
+                                        charge.percentage) / 100
+
+                            elif charge.applied_on == 'cost_per_box':
+                                price_unit = \
+                                    picking.total_charge_product_box_ids
+
+                            elif charge.applied_on == 'double_cost_box':
+                                price_unit = \
+                                    picking.total_charge_other_supplier_box_ids
+
+                            elif charge.applied_on == 'order_template_total' \
+                                    and charge.template_total_type == \
+                                    'change_material':
+
+                                price_unit = \
+                                    picking.total_charge_change_material_ids
+
+                            elif charge.applied_on == 'label':
+                                price_unit = picking.total_charge_label
+
+                            elif charge.applied_on == 'order_template_total' \
+                                    and charge.template_total_type == \
+                                    'monarch_unattached_neck':
+
+                                price_unit = picking.total_monarch_ids
+
+
+                            AccountInvoiceLine.create({
+                                'invoice_id': in_refund_invoice.id,
+                                'product_id': charge_supplier_product.id,
+                                'name': name,
+                                'quantity': 1,
+                                'price_unit': price_unit,
+                                'partner_id': in_refund_invoice.partner_id.id,
+                                'account_id': \
+                                    charge_supplier_product.property_account_expense_id.id,
+                                })
+
+                        in_refund_invoice.signal_workflow(
+                            'invoice_open')
+
+                    else:
+                        raise ValidationError(
+                            _('The product "Charge to suppliers" has been deleted.'))
+
+        return super(StockPicking, self).do_new_transfer()

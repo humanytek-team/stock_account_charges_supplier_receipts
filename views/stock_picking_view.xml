@@ -93,7 +93,9 @@
 
                       <separator string="Changes by missing tags" />
                       <newline />
-                      <field name="label_qty" />
+                      <field
+                        name="label_qty"
+                        attrs="{'readonly': [('state', '=', 'done')]}"/>
                       <field name="total_charge_label" />
                     </group>
 
