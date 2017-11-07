@@ -4,8 +4,7 @@
 
 from openerp import api, fields, models, _
 from openerp.exceptions import ValidationError
-import logging
-_logger = logging.getLogger(__name__)
+
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -177,12 +176,13 @@ class StockPicking(models.Model):
                         lambda inv: inv.state != 'cancel'
                     )
 
+                    invoice_origin = False
                     if purchase_invoices:
-                        invoice_origin = purchase_invoices[0].number
+                        invoice_origin = purchase_invoices[0]
 
                         in_refund_invoice = AccountInvoice.create({
                             'type': 'in_refund',
-                            'origin': invoice_origin,
+                            'origin': invoice_origin.number,
                             'partner_id': purchase_invoices[0].partner_id.id,
                             'currency_id': purchase_invoices[0].currency_id.id,
                             'company_id': purchase_invoices[0].company_id.id,
@@ -257,6 +257,23 @@ class StockPicking(models.Model):
 
                         in_refund_invoice.signal_workflow(
                             'invoice_open')
+
+                        #Application of refund invoice over invoice of supplier
+                        if invoice_origin:
+                            credit_aml = \
+                                in_refund_invoice.move_id.line_ids.filtered(
+                                    lambda line: line.debit > 0 and
+                                    line.credit == 0
+                                )
+                            if credit_aml:
+                                application_refund_invoice = \
+                                    self.pool.get('account.invoice').assign_outstanding_credit(
+                                        self._cr,
+                                        self._uid,
+                                        invoice_origin.id,
+                                        credit_aml[0].id,
+                                        self._context
+                                        )
 
                     else:
                         raise ValidationError(
