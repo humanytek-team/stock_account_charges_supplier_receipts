@@ -1,0 +1,412 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_account_charges_supplier_receipts
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e-20170815\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-07 09:43+0000\n"
+"PO-Revision-Date: 2017-11-07 09:43+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_account_charges_supplier_receipts
+#: selection:charge.supplier.receipt,amount_type:0
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_amount
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_amount
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_amount
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_amount
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_amount
+msgid "Amount"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Amount Total"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_amount_type
+msgid "Amount Type"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_applied_on
+msgid "Applied on"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_qty
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_qty
+msgid "Box Quantity"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Boxes of other vendor"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:20
+#: selection:charge.supplier.receipt,applied_on:0
+#, python-format
+msgid "By Order"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:31
+#: selection:charge.supplier.receipt,template_total_type:0
+#, python-format
+msgid "Change Material"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Changes by missing tags"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Changes in material"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_charge_supplier_form
+msgid "Charge to Supplier"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/stock_picking.py:190
+#: code:addons/stock_account_charges_supplier_receipts/models/stock_picking.py:200
+#, python-format
+msgid "Charge to supplier over invoice of purchase order %s"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:product.product,name:stock_account_charges_supplier_receipts.product_charge_supplier_receipt
+#: model:product.template,name:stock_account_charges_supplier_receipts.product_charge_supplier_receipt_product_template
+msgid "Charge to suppliers"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Charges"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_ids
+msgid "Charges by box of other vendor"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_ids
+msgid "Charges by change of material"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_ids
+msgid "Charges by incorrect box"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_ids
+msgid "Charges by monarch unattached to neck"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_supplier_receipt_ids
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Charges to supplier"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:21
+#: selection:charge.supplier.receipt,applied_on:0
+#, python-format
+msgid "Cost per box"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_create_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_create_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_create_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_create_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_create_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_create_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_create_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_create_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.actions.act_window,name:stock_account_charges_supplier_receipts.action_charge_supplier
+msgid "Discount Charges to Suppliers"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.menu,name:stock_account_charges_supplier_receipts.menu_charge_supplier
+msgid "Discount Charges to Vendors"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_display_name
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_display_name
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_display_name
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_display_name
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:22
+#: selection:charge.supplier.receipt,applied_on:0
+#, python-format
+msgid "Double cost of box"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:25
+#: selection:charge.supplier.receipt,applied_on:0
+#, python-format
+msgid "For the total order of that product (template)"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_id
+msgid "ID"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Incorrect Product Boxes"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt___last_update
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material___last_update
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck___last_update
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box___last_update
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_write_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_write_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_write_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_write_uid
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_write_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_write_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_write_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_write_date
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Monarch unattached to neck"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:32
+#: selection:charge.supplier.receipt,template_total_type:0
+#, python-format
+msgid "Monarch unattached to the neck"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_name
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_charge_supplier_form
+msgid "Name"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:26
+#: selection:charge.supplier.receipt,applied_on:0
+#, python-format
+msgid "Per label"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: selection:charge.supplier.receipt,amount_type:0
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_percentage
+msgid "Percentage"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_picking_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_picking_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_picking_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_picking_id
+msgid "Picking"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_other_supplier_box_product_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_product_box_product_id
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.charge_product_box_form
+msgid "Product"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_product_tmpl_id
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_product_tmpl_id
+msgid "Product (template)"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_qty
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_monarch_unattached_neck_qty
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_label_qty
+msgid "Quantity of missing tags"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_change_material_ids
+msgid "Show field charge_change_material_ids"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_monarch_ids
+msgid "Show field charge_monarch_ids"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_other_supplier_box_ids
+msgid "Show field charge_other_supplier_box_ids"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_product_box_ids
+msgid "Show field charge_product_box_ids"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_label
+msgid "Show fields of charge by missing tags "
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,help:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_change_material_ids
+#: model:ir.model.fields,help:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_label
+#: model:ir.model.fields,help:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_monarch_ids
+#: model:ir.model.fields,help:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_other_supplier_box_ids
+#: model:ir.model.fields,help:stock_account_charges_supplier_receipts.field_stock_picking_show_charge_product_box_ids
+msgid "Technical field"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/stock_picking.py:263
+#, python-format
+msgid "The product \"Charge to suppliers\" has been deleted."
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: code:addons/stock_account_charges_supplier_receipts/models/charge_supplier_receipt.py:62
+#: code:addons/stock_account_charges_supplier_receipts/models/stock_picking_charge_change_material.py:63
+#: code:addons/stock_account_charges_supplier_receipts/models/stock_picking_charge_monarch_unattached_neck.py:42
+#: code:addons/stock_account_charges_supplier_receipts/models/stock_picking_charge_other_supplier_box.py:36
+#, python-format
+msgid "The product doesn't is part of this transfer."
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.ui.view,arch_db:stock_account_charges_supplier_receipts.view_picking_form_charges_supplier
+msgid "Total Quantity"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_total_charge_other_supplier_box_ids
+msgid "Total of charges by box of other vendor"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_total_charge_change_material_ids
+msgid "Total of charges by change in material"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_total_charge_product_box_ids
+msgid "Total of charges by incorrect box"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_total_charge_label
+msgid "Total of charges by missing tags"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_total_monarch_ids
+msgid "Total of charges by monarch unattached to neck"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_total_charges_by_order
+msgid "Total of charges by order"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_stock_picking_charge_change_material_total_order_template
+msgid "Total of product template in the purchase order"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model,name:stock_account_charges_supplier_receipts.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model.fields,field_description:stock_account_charges_supplier_receipts.field_charge_supplier_receipt_template_total_type
+msgid "Type of application over total order of product template"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model,name:stock_account_charges_supplier_receipts.model_charge_supplier_receipt
+msgid "charge.supplier.receipt"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model,name:stock_account_charges_supplier_receipts.model_stock_picking_charge_change_material
+msgid "stock.picking.charge.change.material"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model,name:stock_account_charges_supplier_receipts.model_stock_picking_charge_monarch_unattached_neck
+msgid "stock.picking.charge.monarch.unattached.neck"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model,name:stock_account_charges_supplier_receipts.model_stock_picking_charge_other_supplier_box
+msgid "stock.picking.charge.other.supplier.box"
+msgstr ""
+
+#. module: stock_account_charges_supplier_receipts
+#: model:ir.model,name:stock_account_charges_supplier_receipts.model_stock_picking_charge_product_box
+msgid "stock.picking.charge.product.box"
+msgstr ""
+
