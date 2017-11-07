@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="charge_product_box_form" model="ir.ui.view">
+            <field name="name">charge.product.box.form</field>
+            <field name="model">stock.picking.charge.product.box</field>
+            <field name="arch" type="xml">
+
+              <form>
+                  <sheet>
+                      <div class="oe_title">
+                          <div class="oe_edit_only">
+                              <label for="product_id" string="Product"/>
+                          </div>
+                          <h1>
+                              <field name="product_id"/>
+                          </h1>
+                      </div>
+                      <group>
+                        <field name="qty" />
+                        <field name="amount" />
+                      </group>
+                  </sheet>
+              </form>
+
+            </field>
+        </record>
+
+        <record id="charge_product_box_tree" model="ir.ui.view">
+            <field name="name">charge.product.box.tree</field>
+            <field name="model">stock.picking.charge.product.box</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">                    
+                    <field name="product_id"/>
+                    <field name="qty" />
+                    <field name="amount" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
