@@ -4,7 +4,7 @@
 
 {
     'name': 'Manager of charges to the suppliers on receipt of goods',
-    'version': '9.0.1.0.0',
+    'version': '9.0.1.0.1',
     'category': 'Stock',
     'author': 'Humanytek',
     'website': "http://www.humanytek.com",
