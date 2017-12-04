@@ -2,8 +2,12 @@
 # Copyright 2017 Humanytek - Manuel Marquez <manuel@humanytek.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import logging
+
 from openerp import api, fields, models, _
 from openerp.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
@@ -199,6 +203,17 @@ class StockPicking(models.Model):
                             'company_id': picking.purchase_id.company_id.id,
                             'name': _('Charge to supplier over invoice of purchase order %s' % picking.purchase_id.name)
                         })
+
+                    # The next lines of try applies only for MX
+                    try:
+                        in_refund_invoice.write({
+                            'validate_attachment': True,
+                            'validate_attachment2': True,
+                        })                        
+                    except Exception:
+                        _logger.debug('MX l10n modules are not installed')
+                        pass
+
 
                     charge_supplier_product = self.env.ref(
                         'stock_account_charges_supplier_receipts.product_charge_supplier_receipt')
