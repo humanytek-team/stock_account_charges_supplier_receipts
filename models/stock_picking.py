@@ -161,7 +161,7 @@ class StockPicking(models.Model):
                     else:
                         if record.purchase_id:
                             record.total_charges_by_order += (
-                                record.purchase_id.amount_total *
+                                record.purchase_id.amount_untaxed *
                                 charge.percentage) / 100
 
     @api.multi
@@ -209,11 +209,10 @@ class StockPicking(models.Model):
                         in_refund_invoice.write({
                             'validate_attachment': True,
                             'validate_attachment2': True,
-                        })                        
+                        })
                     except Exception:
                         _logger.debug('MX l10n modules are not installed')
                         pass
-
 
                     charge_supplier_product = self.env.ref(
                         'stock_account_charges_supplier_receipts.product_charge_supplier_receipt')
@@ -231,7 +230,7 @@ class StockPicking(models.Model):
                                     price_unit = charge.amount
                                 else:
                                     price_unit = (
-                                        picking.purchase_id.amount_total *
+                                        picking.purchase_id.amount_untaxed *
                                         charge.percentage) / 100
 
                             elif charge.applied_on == 'cost_per_box':
@@ -258,6 +257,10 @@ class StockPicking(models.Model):
 
                                 price_unit = picking.total_monarch_ids
 
+                            if charge_supplier_product.supplier_taxes_id:
+                                supplier_taxes_id = charge_supplier_product.supplier_taxes_id
+                            else:
+                                supplier_taxes_id = False
 
                             AccountInvoiceLine.create({
                                 'invoice_id': in_refund_invoice.id,
@@ -266,14 +269,16 @@ class StockPicking(models.Model):
                                 'quantity': 1,
                                 'price_unit': price_unit,
                                 'partner_id': in_refund_invoice.partner_id.id,
-                                'account_id': \
-                                    charge_supplier_product.property_account_expense_id.id,
-                                })
+                                'account_id':
+                                charge_supplier_product.property_account_expense_id.id,
+                                'invoice_line_tax_ids': supplier_taxes_id,
+                            })
 
                         in_refund_invoice.signal_workflow(
                             'invoice_open')
 
-                        #Application of refund invoice over invoice of supplier
+                        # Application of refund invoice over invoice of
+                        # supplier
                         if invoice_origin:
                             credit_aml = \
                                 in_refund_invoice.move_id.line_ids.filtered(
@@ -288,7 +293,7 @@ class StockPicking(models.Model):
                                         invoice_origin.id,
                                         credit_aml[0].id,
                                         self._context
-                                        )
+                                    )
 
                     else:
                         raise ValidationError(
