@@ -11,7 +11,8 @@ class StockPickingChargeChangeMaterial(models.Model):
     _rec_name = 'product_tmpl_id'
 
     picking_id = fields.Many2one('stock.picking', 'Picking', required=True)
-    product_tmpl_id = fields.Many2one('product.template', 'Product (template)', required=True)
+    product_tmpl_id = fields.Many2one(
+        'product.template', 'Product (template)', required=True)
     qty = fields.Integer('Quantity', required=True)
     total_order_template = fields.Float(
         'Total of product template in the purchase order',
@@ -30,8 +31,7 @@ class StockPickingChargeChangeMaterial(models.Model):
                         record.product_tmpl_id.id
                     )
                     record.total_order_template = sum(
-                        po_lines.mapped('price_total'))
-
+                        po_lines.mapped('price_subtotal'))
 
     @api.depends('total_order_template', 'qty')
     def _compute_amount(self):
