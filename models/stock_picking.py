@@ -263,7 +263,7 @@ class StockPicking(models.Model):
                                     for tax in
                                     charge_supplier_product.supplier_taxes_id]
                             else:
-                                supplier_taxes_id = False
+                                supplier_taxes_id = False                            
 
                             AccountInvoiceLine.create({
                                 'invoice_id': in_refund_invoice.id,
@@ -277,6 +277,7 @@ class StockPicking(models.Model):
                                 'invoice_line_tax_ids': supplier_taxes_id,
                             })
 
+                        in_refund_invoice.compute_taxes()
                         in_refund_invoice.signal_workflow(
                             'invoice_open')
 
