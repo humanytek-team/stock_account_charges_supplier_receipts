@@ -258,7 +258,10 @@ class StockPicking(models.Model):
                                 price_unit = picking.total_monarch_ids
 
                             if charge_supplier_product.supplier_taxes_id:
-                                supplier_taxes_id = charge_supplier_product.supplier_taxes_id
+                                supplier_taxes_id = [
+                                    (4, tax.id)
+                                    for tax in
+                                    charge_supplier_product.supplier_taxes_id]
                             else:
                                 supplier_taxes_id = False
 
