@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [9.0.1.0.3] - 2018-02-08
+### changed
+- Validate expense account in product.
+
 ## [9.0.1.0.2] - 2018-01-24
 ### changed
 - Adds taxes of product "charge to supplier" in lines of refund invoices.
