@@ -263,7 +263,11 @@ class StockPicking(models.Model):
                                     for tax in
                                     charge_supplier_product.supplier_taxes_id]
                             else:
-                                supplier_taxes_id = False                            
+                                supplier_taxes_id = False
+
+                            if not charge_supplier_product.property_account_expense_id:
+                                raise ValidationError(
+                                    _('Expense account is not configured for the product'))
 
                             AccountInvoiceLine.create({
                                 'invoice_id': in_refund_invoice.id,
